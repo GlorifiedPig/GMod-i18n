@@ -18,8 +18,8 @@ i18n.RegisterPhrases( languageIdentifier :: string, phraseTbl :: table )
 - Registers a list of phrases from a `table`.
 
 ```lua
-i18n.GetPhrase( phraseId :: string, ... :: vararg )
+i18n.GetPhrase( phraseId :: string, params :: vararg )
 ```
 - Returns a `string` that matches up with the language set in the convar `gmod_language`.
 - Needs to be registered. If the language does not exist, it defaults to English.
-- The `vararg` is a list of parameters in case you need to use `%s`, `%i`, et cetera.
+- `params` is a vararg of parameters for usage with `%s`, `%i`, et cetera.

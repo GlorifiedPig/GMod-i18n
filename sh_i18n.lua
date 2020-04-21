@@ -12,7 +12,7 @@
 
 local i18nVersion = 1.1
 
-if !i18n or i18n.Version < i18nVersion then
+if not i18n or i18n.Version < i18nVersion then
     i18n = {
         Version = i18nVersion
     }
