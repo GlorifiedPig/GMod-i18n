@@ -33,11 +33,13 @@ if not i18n or i18n.Version < i18nVersion then
 
     function i18n.GetPhrase( phraseIdentifier, ... )
         local phraseLanguage = registeredPhrases[language:GetString()] or registeredPhrases["en"]
+        local finalPhrase = registeredPhrases["en"][phraseIdentifier]
+        if phraseLanguage[phraseIdentifier] then finalPhrase = phraseLanguage[phraseIdentifier] end
 
-        if phraseLanguage[phraseIdentifier] then
-            return string.format( phraseLanguage[phraseIdentifier], ... )
-        elseif registeredPhrases["en"][phraseIdentifier] then
-            return string.format( registeredPhrases["en"][phraseIdentifier], ... )
+        if ... then
+            return string.format( finalPhrase, ... )
+        else
+            return finalPhrase
         end
     end
 end
