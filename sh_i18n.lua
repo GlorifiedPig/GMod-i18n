@@ -10,7 +10,7 @@
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ]]--
 
-local i18nVersion = 1.0
+local i18nVersion = 1.1
 
 if !i18n or i18n.Version < i18nVersion then
     i18n = {
@@ -31,11 +31,13 @@ if !i18n or i18n.Version < i18nVersion then
         end
     end
 
-    function i18n.GetPhrase( phraseIdentifier )
-        if registeredPhrases and registeredPhrases[language:GetString()] and registeredPhrases[language:GetString()][phraseIdentifier] then
-            return registeredPhrases[language:GetString()][phraseIdentifier]
-        elseif registeredPhrases and registeredPhrases["en"] and registeredPhrases["en"][phraseIdentifier] then
-            return registeredPhrases["en"][phraseIdentifier]
+    function i18n.GetPhrase( phraseIdentifier, ... )
+        local phraseLanguage = registeredPhrases[language:GetString()] or registeredPhrases["en"]
+
+        if phraseLanguage[phraseIdentifier] then
+            return string.format( phraseLanguage[phraseIdentifier], ... )
+        elseif registeredPhrases["en"][phraseIdentifier] then
+            return string.format( registeredPhrases["en"][phraseIdentifier], ... )
         end
     end
 end
