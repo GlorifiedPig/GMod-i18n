@@ -36,10 +36,6 @@ if not i18n or i18n.Version < i18nVersion then
         local finalPhrase = registeredPhrases["en"][phraseIdentifier]
         if phraseLanguage[phraseIdentifier] then finalPhrase = phraseLanguage[phraseIdentifier] end
 
-        if table.Count( { ... } ) > 0 then
-            return string.format( finalPhrase, ... )
-        else
-            return finalPhrase
-        end
+        return table.Count( { ... } ) > 0 and string.format( finalPhrase, ... ) or finalPhrase
     end
 end
