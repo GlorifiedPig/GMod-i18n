@@ -36,6 +36,6 @@ if not i18n or i18n.Version < i18nVersion then
         local finalPhrase = registeredPhrases["en"][phraseIdentifier]
         if phraseLanguage[phraseIdentifier] then finalPhrase = phraseLanguage[phraseIdentifier] end
 
-        return #{ ... } > 0 and string.format( finalPhrase, ... ) or finalPhrase
+        return select("#", ...) > 0 and string.format( finalPhrase, ... ) or finalPhrase
     end
 end
